@@ -1,0 +1,77 @@
+/* ===========================
+   ANIMACIONES
+=========================== */
+
+/* Transición de tema (overlay flash) */
+.theme-transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg-base);
+  pointer-events: none;
+  animation: themeFlash .5s var(--ease) forwards;
+}
+@keyframes themeFlash {
+  0%   { opacity: .8; }
+  100% { opacity: 0; }
+}
+
+/* Pop de celda */
+@keyframes cellPop {
+  0%   { transform: scale(.6); opacity: .5; }
+  70%  { transform: scale(1.12); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Celda ganadora */
+@keyframes winnerPulse {
+  0%   { box-shadow: none; }
+  40%  { box-shadow: 0 0 0 4px var(--accent-p1); transform: scale(1.08); }
+  70%  { box-shadow: 0 0 0 8px transparent; transform: scale(1.04); }
+  100% { box-shadow: 0 0 0 3px var(--accent-p1); transform: scale(1.04); }
+}
+
+/* Turno banner shake */
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  20%      { transform: translateX(-6px); }
+  40%      { transform: translateX(6px); }
+  60%      { transform: translateX(-4px); }
+  80%      { transform: translateX(4px); }
+}
+.shake { animation: shake .4s var(--ease); }
+
+/* Modal entrada */
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(.88) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+.modal { animation: modalIn .38s cubic-bezier(.34,1.56,.64,1) forwards; }
+
+/* Mic pulse */
+@keyframes pulseMic {
+  0%,100% { transform: scale(1); filter: brightness(1); }
+  50%     { transform: scale(1.25); filter: brightness(1.4) drop-shadow(0 0 6px var(--accent-p1)); }
+}
+
+/* Fade in general */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeIn .3s var(--ease) forwards; }
+
+/* Bounce subtle scoreboard */
+@keyframes scoreCount {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.35); color: var(--accent-p1); }
+  100% { transform: scale(1); }
+}
+.score-bump { animation: scoreCount .4s var(--ease); }
+
+/* Turn change */
+@keyframes turnSlide {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.turn-anim { animation: turnSlide .3s var(--ease) forwards; }

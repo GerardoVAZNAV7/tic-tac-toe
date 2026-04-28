@@ -1,0 +1,72 @@
+/* ===========================
+   VARIABLES DE DISEÑO
+   Design Tokens — Paleta equilibrada
+=========================== */
+:root {
+  /* Paleta base — modo oscuro (default) */
+  --bg-base:       #0f1117;
+  --bg-surface:    #181c27;
+  --bg-elevated:   #1f2436;
+  --bg-hover:      #252b3d;
+  --border:        #2e3550;
+  --border-light:  #3d4566;
+
+  --text-primary:   #e8ecf4;
+  --text-secondary: #8892a8;
+  --text-muted:     #5a6278;
+
+  /* Acentos */
+  --accent-p1:      #6EE7B7;   /* verde menta */
+  --accent-p2:      #F9A8D4;   /* rosa suave */
+  --accent-draw:    #94A3B8;
+
+  --accent-p1-glow: rgba(110,231,183,.25);
+  --accent-p2-glow: rgba(249,168,212,.25);
+
+  /* Funcionales */
+  --success:   #4ADE80;
+  --warning:   #FBBF24;
+  --danger:    #F87171;
+
+  /* Sombras */
+  --shadow-sm:  0 1px 3px rgba(0,0,0,.4);
+  --shadow-md:  0 4px 16px rgba(0,0,0,.5);
+  --shadow-lg:  0 12px 40px rgba(0,0,0,.6);
+  --shadow-cell: 0 2px 8px rgba(0,0,0,.35);
+
+  /* Radios */
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+
+  /* Tipografía */
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+
+  /* Transición global */
+  --ease: cubic-bezier(.4,0,.2,1);
+  --dur: 250ms;
+
+  /* Sidebar */
+  --sidebar-w: 300px;
+}
+
+/* MODO CLARO */
+[data-theme="light"] {
+  --bg-base:       #F1F5FB;
+  --bg-surface:    #FFFFFF;
+  --bg-elevated:   #EAF0FA;
+  --bg-hover:      #DDE6F5;
+  --border:        #C8D5E8;
+  --border-light:  #B5C5DC;
+
+  --text-primary:   #1a1f2e;
+  --text-secondary: #4a5568;
+  --text-muted:     #8898aa;
+
+  --shadow-sm:  0 1px 3px rgba(0,0,0,.08);
+  --shadow-md:  0 4px 16px rgba(0,0,0,.1);
+  --shadow-lg:  0 12px 40px rgba(0,0,0,.12);
+  --shadow-cell: 0 2px 8px rgba(0,0,0,.08);
+}

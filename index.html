@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gato — UX/UI Game</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/css/variables.css">
+  <link rel="stylesheet" href="/src/css/base.css">
+  <link rel="stylesheet" href="/src/css/layout.css">
+  <link rel="stylesheet" href="/src/css/components.css">
+  <link rel="stylesheet" href="/src/css/board.css">
+  <link rel="stylesheet" href="/src/css/sidebar.css">
+  <link rel="stylesheet" href="/src/css/animations.css">
+  <link rel="stylesheet" href="/src/css/modal.css">
+  <link rel="stylesheet" href="/src/css/responsive.css">
+</head>
+<body>
+
+  <!-- SIDEBAR DE CONFIGURACIÓN -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <span class="sidebar-title">Configuración</span>
+      <button class="btn-icon sidebar-close" id="sidebarClose" aria-label="Cerrar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <div class="sidebar-body">
+
+      <!-- MODO OSCURO / CLARO -->
+      <section class="config-section">
+        <h3 class="config-label">Apariencia</h3>
+        <div class="toggle-row">
+          <span>Modo oscuro</span>
+          <label class="toggle" id="themeToggle">
+            <input type="checkbox" id="themeCheck" checked>
+            <span class="toggle-track">
+              <span class="toggle-thumb">
+                <span class="toggle-icon moon">🌙</span>
+                <span class="toggle-icon sun">☀️</span>
+              </span>
+            </span>
+          </label>
+        </div>
+      </section>
+
+      <!-- MODO VOZ -->
+      <section class="config-section">
+        <h3 class="config-label">Control por voz</h3>
+        <div class="toggle-row">
+          <span>Activar voz</span>
+          <label class="toggle">
+            <input type="checkbox" id="voiceCheck">
+            <span class="toggle-track">
+              <span class="toggle-thumb">
+                <span class="toggle-icon">🎙️</span>
+                <span class="toggle-icon">🔇</span>
+              </span>
+            </span>
+          </label>
+        </div>
+        <p class="config-hint" id="voiceHint" style="display:none">Di una coordenada como <strong>"A1"</strong>, <strong>"B2"</strong>, etc.</p>
+      </section>
+
+      <!-- ICONOS JUGADOR 1 -->
+      <section class="config-section">
+        <h3 class="config-label">Icono — Jugador 1</h3>
+        <div class="icon-grid" id="iconGridP1"></div>
+        <div class="color-row">
+          <span>Color</span>
+          <input type="color" class="color-pick" id="colorP1" value="#6EE7B7">
+        </div>
+      </section>
+
+      <!-- ICONOS JUGADOR 2 -->
+      <section class="config-section">
+        <h3 class="config-label">Icono — Jugador 2</h3>
+        <div class="icon-grid" id="iconGridP2"></div>
+        <div class="color-row">
+          <span>Color</span>
+          <input type="color" class="color-pick" id="colorP2" value="#F9A8D4">
+        </div>
+      </section>
+
+      <!-- NOMBRES -->
+      <section class="config-section">
+        <h3 class="config-label">Nombres</h3>
+        <input class="text-input" id="nameP1" type="text" placeholder="Jugador 1" maxlength="12">
+        <input class="text-input" id="nameP2" type="text" placeholder="Jugador 2" maxlength="12">
+      </section>
+
+      <button class="btn-primary" id="applyConfig">Aplicar cambios</button>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- MAIN APP -->
+  <div class="app-wrapper">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <button class="btn-icon menu-btn" id="menuBtn" aria-label="Configuración">
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+      </button>
+      <h1 class="game-title">Gato</h1>
+      <button class="btn-icon voice-indicator" id="voiceIndicator" title="Estado de voz" style="display:none">
+        <span id="voicePulse">🎙️</span>
+      </button>
+    </header>
+
+    <!-- SCOREBOARD -->
+    <section class="scoreboard">
+      <div class="score-card" id="scoreP1">
+        <div class="score-icon" id="scoreIconP1">✦</div>
+        <div class="score-info">
+          <span class="score-name" id="scoreNameP1">Jugador 1</span>
+          <span class="score-num" id="scoreNumP1">0</span>
+        </div>
+      </div>
+      <div class="score-card draws">
+        <div class="score-icon">🤝</div>
+        <div class="score-info">
+          <span class="score-name">Empates</span>
+          <span class="score-num" id="scoreDraws">0</span>
+        </div>
+      </div>
+      <div class="score-card" id="scoreP2">
+        <div class="score-icon" id="scoreIconP2">✿</div>
+        <div class="score-info">
+          <span class="score-name" id="scoreNameP2">Jugador 2</span>
+          <span class="score-num" id="scoreNumP2">0</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TURNO ACTUAL -->
+    <div class="turn-banner" id="turnBanner">
+      <span class="turn-icon" id="turnIcon"></span>
+      <span id="turnText">Selecciona quién inicia</span>
+    </div>
+
+    <!-- TABLERO -->
+    <main class="board-wrapper">
+      <!-- Etiquetas de columnas (modo voz) -->
+      <div class="board-col-labels" id="colLabels" style="display:none">
+        <div></div>
+        <div>1</div><div>2</div><div>3</div>
+      </div>
+      <div class="board-row-labels-wrapper">
+        <!-- Etiquetas de filas (modo voz) -->
+        <div class="board-row-labels" id="rowLabels" style="display:none">
+          <div>A</div><div>B</div><div>C</div>
+        </div>
+        <div class="board" id="board">
+          <!-- 9 celdas generadas por JS -->
+        </div>
+      </div>
+    </main>
+
+    <!-- BOTÓN FINALIZAR -->
+    <div class="action-bar">
+      <button class="btn-end" id="btnEnd">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Finalizar ronda
+      </button>
+    </div>
+
+  </div>
+
+  <!-- MODAL: elegir quién inicia -->
+  <div class="modal-overlay" id="modalWhoStarts">
+    <div class="modal">
+      <h2 class="modal-title">¿Quién inicia esta ronda?</h2>
+      <div class="modal-players">
+        <button class="player-pick-btn" id="pickP1">
+          <span class="pick-icon" id="pickIconP1">✦</span>
+          <span id="pickNameP1">Jugador 1</span>
+        </button>
+        <button class="player-pick-btn" id="pickP2">
+          <span class="pick-icon" id="pickIconP2">✿</span>
+          <span id="pickNameP2">Jugador 2</span>
+        </button>
+      </div>
+      <button class="btn-close-session" id="btnCloseSession">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 12h6M12 9v6"/></svg>
+        Cerrar marcador
+      </button>
+    </div>
+  </div>
+
+  <!-- MODAL: resumen de sesión -->
+  <div class="modal-overlay" id="modalSession" style="display:none">
+    <div class="modal session-modal">
+      <div class="session-trophy" id="sessionTrophy">🏆</div>
+      <h2 class="modal-title" id="sessionTitle"></h2>
+      <p class="result-sub" id="sessionSub"></p>
+      <div class="session-stats" id="sessionStats"></div>
+      <button class="btn-primary" id="btnNewSession">Nueva sesión</button>
+    </div>
+    <canvas id="confettiCanvas2"></canvas>
+  </div>
+
+  <!-- MODAL: resultado de ronda -->
+  <div class="modal-overlay" id="modalResult" style="display:none">
+    <div class="modal result-modal">
+      <div class="result-icon" id="resultIcon"></div>
+      <h2 class="modal-title" id="resultTitle"></h2>
+      <p class="result-sub" id="resultSub"></p>
+      <button class="btn-primary" id="btnNextRound">Nueva ronda</button>
+    </div>
+    <canvas id="confettiCanvas"></canvas>
+  </div>
+
+  <!-- ESCRIPTS -->
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

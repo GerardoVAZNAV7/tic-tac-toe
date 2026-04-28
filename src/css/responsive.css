@@ -1,0 +1,40 @@
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media (max-width: 400px) {
+  :root { --sidebar-w: 88vw; }
+
+  .app-wrapper { padding: 0 10px 24px; gap: 14px; }
+
+  .game-title { font-size: 1.35rem; }
+
+  .score-num { font-size: 1.35rem; }
+
+  .board { max-width: 300px; gap: 6px; }
+
+  .cell { font-size: 2rem; border-radius: var(--r-sm); }
+
+  .scoreboard { gap: 6px; }
+}
+
+@media (min-width: 600px) {
+  .app-wrapper { padding: 0 24px 40px; gap: 24px; }
+
+  .board { max-width: 380px; gap: 10px; }
+
+  .cell { font-size: 2.8rem; }
+}
+
+@media (min-width: 900px) {
+  .app-wrapper { padding: 0 32px 48px; gap: 28px; max-width: 560px; }
+
+  .board { max-width: 420px; gap: 12px; }
+
+  .cell { font-size: 3rem; }
+}
+
+/* Touch / pointer */
+@media (hover: none) {
+  .cell:hover:not(.filled) { transform: none; }
+  .btn-icon:hover { transform: none; }
+}
