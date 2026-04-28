@@ -1,0 +1,2 @@
+# Esto crea el archivo y le dice a git que ignore node_modules
+echo "node_modules/" > .gitignore
